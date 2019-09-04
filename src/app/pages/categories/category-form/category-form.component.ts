@@ -48,7 +48,6 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
       this.createCategory();
     }else{
       this.updateCategory();
-
     }
   }
   // PRIVATES METHODS
@@ -71,11 +70,12 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   private loadCategory(){
     if(this.currentAction == "edit"){
       this.route.paramMap.pipe(
-        switchMap(params => this.categoryService.getById(+params.get("id")))
+        switchMap(params => this.categoryService.getById(+params.get("id") ))
       )
       .subscribe(
         (category) =>{
           this.category = category
+          console.log('retorno da api', category)
           this.categoryForm.patchValue(category) // binds loade category data to categoryForm
         },
         (error) =>{
@@ -86,11 +86,15 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   }
 
   private setPageTitle(){
-   if(this.currentAction == 'new')
+   if(this.currentAction == 'new'){
     this.pageTitle = "Cadastro de Nova Categoria"
+    console.log(this.pageTitle)
+   }
     else{
       const categoryName = this.category.name || ""
       this.pageTitle = "Editando Categoria: " + categoryName;
+      console.log(this.pageTitle)
+      console.log(this.category)
     }
   }
 
