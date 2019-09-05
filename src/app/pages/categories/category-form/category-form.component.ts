@@ -130,6 +130,5 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     } else{
        this.serverErrorMessages = ["Falha na comunicação com o servidor. Por favor, tente mais tarde"]
     }
-
   }
 }
